@@ -13,7 +13,9 @@ export default function SessionProvider({
   const setSession = useSetSession();
   const isSessionLoaded = useIsSessionLoaded();
 
-  const { data } = useProfileData(session?.user.id);
+  const { data, isLoading: isProfileLoading } = useProfileData(
+    session?.user.id,
+  );
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
@@ -22,6 +24,7 @@ export default function SessionProvider({
   }, []);
 
   if (!isSessionLoaded) return <GlobalLoader />;
+  if (isProfileLoading) return <GlobalLoader />;
 
   return children;
 }
