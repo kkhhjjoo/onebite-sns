@@ -11,7 +11,7 @@ const initialState = {
   session: null,
 } as State;
 
-const useSessionStore = create(
+export const useSessionStore = create(
   devtools(
     combine(initialState, (set) => ({
       actions: {
